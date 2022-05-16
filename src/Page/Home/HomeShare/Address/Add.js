@@ -3,7 +3,7 @@ import React from 'react';
 const Add = (props) => {
     const {img,name,Title}=props.add;
     return (
-        <div class="card w-96 bg-base-100 shadow-2xl mb-10 ml-auto">
+        <div class="card w-auto bg-base-100 shadow-2xl mb-10 ml-auto">
         <figure class="px-10 pt-10">
           <img src={img} alt="Shoes" class="rounded-xl" />
         </figure>

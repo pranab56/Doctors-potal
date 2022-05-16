@@ -5,10 +5,10 @@ import svg3 from "../../../assets/icons/phone.svg";
 
 const Location = () => {
   return (
-    <nav className="lg:flex lg:gap-2 lg:justify-evenly sm:block mt-24 mb-24">
+    <nav className="lg:flex lg:gap-2 lg:justify-evenly sm:block mt-24 mb-24" data-aos="fade-right" >
       <section className="flex justify-evenly bg-teal-400 p-5 rounded-md w-auto ">
         <img width={60} src={svg1} alt="" />
-        <div className="mt-4 text-white">
+        <div className="mt-4 ml-4 text-white">
           <h4>Opening Hours</h4>
           <p>this hospital all time people care</p>
         </div>

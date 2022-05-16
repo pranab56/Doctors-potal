@@ -9,8 +9,8 @@ const Address = () => {
         .then(data=>setAddress(data))
     },[])
     return (
-        <div>
-            <h4 className='text-center text-sm font-bold text-primary mb-5 mt-20'>Our Service</h4>
+        <div data-aos="fade-up">
+            <h4 className='text-center text-sm font-bold text-primary mb-5 mt-20' >Our Service</h4>
             <h2 className='text-center text-3xl mb-10'>Services We Provide</h2>
             <div className='lg:flex lg:ml-5 lg:mb-20 gap-10 sm:block sm:mb-10 sm:ml-10'>
             {

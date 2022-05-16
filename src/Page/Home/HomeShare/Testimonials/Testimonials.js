@@ -12,7 +12,7 @@ const Testimonials = () => {
        <nav>
            <p className='text-primary ml-10  mt-10'>Testimonial</p>
            <p className='text-3xl ml-10 mt-5'>What Our Patients Says</p>
-            <div className='lg:flex justify-center lg:gap-8 sm:block lg:gap-0 lg:mt-20 sm:mt-10'>
+            <div className='lg:flex justify-center lg:gap-10 sm:block sm:mt-10'>
             {
                 users.map(user=><Testimonial
                 key={user.id}

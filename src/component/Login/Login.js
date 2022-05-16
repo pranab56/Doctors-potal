@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div class="w-full max-w-sm p-6 m-auto bg-slate-300 rounded-md shadow-md dark:bg-gray-800 mt-10">
+    <div class="w-full max-w-sm p-6 m-auto bg-slate-200 rounded-md shadow-md dark:bg-gray-800 mt-10">
       <h1 class="text-3xl font-semibold text-center text-gray-700 dark:text-white mb-10">
         Doctors Portal
       </h1>

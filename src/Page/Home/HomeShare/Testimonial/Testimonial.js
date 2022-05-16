@@ -3,13 +3,13 @@ import React from 'react';
 const Testimonial = (props) => {
     const {name,city,img,title}=props.user;
     return (
-        <div class=" card w-96 bg-base-100 shadow-xl">
+        <div class=" card w-auto bg-base-100 shadow-xl mb-10 ">
         
         <div class="card-body">
           <p>{title}</p>
           <div className='flex mt-5'>
-          <img class="mask mask-circle w-20" src={img} />
-          <div className='mt-3 ml-5'>
+          <img alt="" className="w-12 h-12 mt-1 rounded-full ring-2 ring-offset-4 dark:bg-gray-500 ring-violet-400 ring-offset-gray-800" src={img} />
+          <div className=' ml-5'>
           <h4>{name}</h4>
           <p>{city}</p>
           </div>

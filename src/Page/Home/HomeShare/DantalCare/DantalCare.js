@@ -3,7 +3,7 @@ import img from '../../../../assets/images/treatment.png';
 
 const DantalCare = () => {
     return (
-        <div class="hero min-h-screen">
+        <div class="hero min-h-screen" data-aos="fade-up-right">
   <div class="hero-content flex-col lg:flex-row">
     <img src={img} class="lg;max-w-lg sm:max-w-sm rounded-lg shadow-2xl" />
     <div className='lg:ml-32 sm:ml-0'>
