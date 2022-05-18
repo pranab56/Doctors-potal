@@ -1,11 +1,36 @@
-import React from 'react';
+import { data } from "autoprefixer";
+import React from "react";
 
 const Review = () => {
-    return (
-        <div>
-            <h2>this is Review</h2>
-        </div>
-    );
+  const handlePostData = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+
+    fetch("http://localhost:5000/data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(email),
+    })
+    .then(res=>res.json())
+    .then(data=>{
+    console.log('Success',data)
+    })
+  };
+
+  return (
+    <div>
+      <form onSubmit={handlePostData}>
+        <input
+          type="text"
+          placeholder="email"
+          name="email"
+          className="border-8 border-green-400"
+        />
+      </form>
+    </div>
+  );
 };
 
 export default Review;
