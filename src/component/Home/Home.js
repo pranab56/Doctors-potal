@@ -13,12 +13,17 @@ import Location from '../../Page/Home/Location/Location';
 
 
 const Home = () => {
+    const [user] = useAuthState(auth);
+    const navigate=useNavigate();
+    if(!user){
+        navigate('/login')
+    }
     return (
         <div>
            <Part1></Part1>
            <Location></Location>
            <Address></Address>
-           <DantalCare></DantalCare>
+           <DantalCare></DantalCare>    
            <Appointment></Appointment>
            <Testimonials></Testimonials>
            <ContactFrom></ContactFrom>

@@ -1,15 +1,21 @@
 import { format } from "date-fns";
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
+import auth from "../../firebase.init";
 
-const BookingModal = ({ treatment, date, setTreatment }) => {
+const BookingModal = ({ treatment, date, setTreatment,refetch }) => {
+  const [user] = useAuthState(auth);
   const handleSubmitModal = (event) => {
     event.preventDefault();
+    const TreatmentId=treatment._id;
+    const TreatmentName=treatment.name;
     const slot = event.target.slot.value;
     const date = event.target.date.value;
     const name = event.target.fullName.value;
     const number = event.target.number.value;
     const email = event.target.email.value;
-    const datas = {slot,date,name,number,email};
+    const datas = {TreatmentName,TreatmentId,slot,date,name,number,email};
 
     fetch("http://localhost:5000/data", {
       method: "POST", 
@@ -20,9 +26,16 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
+        console.log(data);
+        if(data.success){
+          toast(`Booking Success ${date} on ${slot}`)
+        }
+       else{
+        toast.error(`Already have a booking ${date} on ${data.body.slot}`)
+       }
       });
-    // setTreatment(null)
+      refetch()
+    setTreatment(null)
   };
 
   return (
@@ -31,7 +44,7 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
       <div className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <label
-            for="Booking-modal"
+            htmlFor="Booking-modal"
             className="btn btn-sm btn-circle absolute right-2 top-2"
           >
             ✕
@@ -65,7 +78,8 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
                     id="username"
                     autoComplete="off"
                     name="fullName"
-                    placeholder="FULL NAME"
+                   value={user.displayName}
+                   disabled
                     type="text"
                     className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                   />
@@ -86,7 +100,8 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
                     id="emailAddress"
                     autoComplete="off"
                     name="email"
-                    placeholder="EMAIL"
+                    value={user.email}
+                    disabled
                     type="email"
                     className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                   />

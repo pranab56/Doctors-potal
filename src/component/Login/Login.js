@@ -1,21 +1,33 @@
 import React from "react";
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
-import { Link } from "react-router-dom";
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import { useForm } from "react-hook-form";
 import Loading from "../../Page/Loading";
+import {toast } from 'react-toastify';
+  
+
 
 const Login = () => {
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   const { register, formState: { errors }, handleSubmit } = useForm();
   const [signInWithEmailAndPassword, user,loading,error,] = useSignInWithEmailAndPassword(auth);
+  const [sendPasswordResetEmail, PassResetSending, PassResetError] = useSendPasswordResetEmail(auth);
+  // react router
+ const navigate=useNavigate();
+ const location =useLocation();
  
+ const from = location.state?.from?.pathname || "/";
   // from onsubmit
-  const onSubmit = data =>{
-     signInWithEmailAndPassword(data.email,data.password)
+  const onSubmit =async data =>{
+    await signInWithEmailAndPassword(data.email,data.password)
+     await sendPasswordResetEmail(data.email);
+     toast('Sent email')
     };
+   
     // jodi google loading and email pass loading hoi
     if(loading || gLoading){
+      // ekhane loading componet ta create kora hoyeche
     return <Loading></Loading>
     }
     // error er jonno 
@@ -26,18 +38,20 @@ const Login = () => {
 
     // jodi GoogleUser thake taile dibe
   if(user || gUser){
-    console.log(user || gUser);
+    navigate(from, { replace: true })
   }
+
+  
   return (
     <div className="w-full max-w-sm p-6 m-auto bg-slate-200 rounded-md shadow-md dark:bg-gray-800 mt-10">
       <h1 className="text-3xl font-semibold text-center text-gray-700 dark:text-white mb-10">
-        Doctors Portal
+        LOGIN
       </h1>
 
       <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label
-            for="email"
+            htmlFor="email"
             className="block text-sm text-gray-800 dark:text-gray-200"
           >
             Email
@@ -66,17 +80,15 @@ const Login = () => {
         <div className="mt-4">
           <div className="flex items-center justify-between">
             <label
-              for="password"
+              htmlFor="password"
               className="block text-sm text-gray-800 dark:text-gray-200"
             >
               Password
             </label>
-            <a
-              href="#"
-              className="text-xs text-gray-600 dark:text-gray-400 hover:underline"
-            >
-              Forget Password?
-            </a>
+           
+            <button
+           onClick={onSubmit}
+            className="text-xs text-gray-600 dark:text-gray-400 hover:underline" ><small>Forget Password?</small></button>
           </div>
 
           <input
@@ -137,6 +149,7 @@ const Login = () => {
       >
         Don't have an account?
       </Link>
+      
     </div>
   );
 };

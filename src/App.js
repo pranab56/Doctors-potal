@@ -2,7 +2,8 @@ import { Route, Routes } from 'react-router-dom';
 import AOS from 'aos';
 import 'animate.css';
 import 'aos/dist/aos.css';
-
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer } from 'react-toastify';
 import './App.css';
 import About from './component/About/About';
 import Appointment from './component/Appointment/Appointment';
@@ -12,6 +13,10 @@ import Home from './component/Home/Home';
 import Login from './component/Login/Login';
 import Register from './component/Register/Register';
 import Review from './component/Review/Review';
+import RequireAuth from './component/Login/RequireAuth';
+import DashBoard from './component/DashBoard.js/DashBoard';
+import MyAppoinment from './component/DashBoard.js/MyAppoinment';
+import MyReview from './component/DashBoard.js/MyReview';
 
 function App() {
   AOS.init();
@@ -47,13 +52,21 @@ function App() {
        <Route path='/' element={<Home></Home>}></Route>
        <Route path='/home' element={<Home></Home>}></Route>
        <Route path='about' element={<About></About>}></Route>
-       <Route path='/appointment' element={<Appointment></Appointment>}></Route>
+       <Route path='/appointment' element={<RequireAuth>
+        <Appointment></Appointment>
+       </RequireAuth>}></Route>
+       <Route path='/dashboard' element={<RequireAuth>
+        <DashBoard></DashBoard>
+       </RequireAuth>}>
+         <Route index element={<MyAppoinment></MyAppoinment>}></Route>
+         <Route path='myreview' element={<MyReview></MyReview>}></Route>
+       </Route>
        <Route path='/review' element={<Review></Review>}></Route>
        <Route path='/contact' element={<Contact></Contact>}></Route>
        <Route path='/login' element={<Login></Login>}></Route>
        <Route path='/register' element={<Register></Register>}></Route>
      </Routes>
-     
+     <ToastContainer></ToastContainer>
     </div>
   );
 }

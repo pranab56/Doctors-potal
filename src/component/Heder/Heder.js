@@ -1,12 +1,17 @@
 import { signOut } from "firebase/auth";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import CustomLink from "../../Page/CustomLink/CustomLink";
-import Home from "../Home/Home";
+
 
 const Heder = () => {
+  const [user, loading, error] = useAuthState(auth);
+  const logout = () => {
+    signOut(auth);
+   
+  };
+ 
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -58,10 +63,15 @@ const Heder = () => {
           <CustomLink className="mr-5" to={"/contact"}>
             Contact us
           </CustomLink>
-
-          <CustomLink className="mr-5" to={"/login"}>
-            Login
+          {
+            user &&  <CustomLink className="mr-5" to={"/dashboard"}>
+            DashBoard
           </CustomLink>
+          }
+
+         {user ? <CustomLink onClick={logout} to={'/'}>LogOut</CustomLink> : <CustomLink className="mr-5" to={"/login"}>
+            Login
+          </CustomLink>}
         </ul>
       </div>
     </div>
