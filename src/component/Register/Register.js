@@ -5,6 +5,7 @@ import auth from "../../firebase.init";
 import { useForm } from "react-hook-form";
 import Loading from "../../Page/Loading";
 import { toast } from 'react-toastify';
+import UseToken from '../../Hooks/UseToken';
 
 
 
@@ -30,10 +31,12 @@ const Register = () => {
    toast('Cheak your Email')
     // update profile
      await updateProfile({ displayName:data.Name });
-     navigate('/')
+     
      console.log('update done');
     };
    
+
+    const [token]=UseToken(user || gUser)
 
     // jodi google loading and email pass loading hoi
     if(loading || gLoading || updating || verisending){
@@ -47,8 +50,9 @@ const Register = () => {
     }
 
     // jodi GoogleUser thake taile dibe
-  if(user || gUser){
-    console.log(user || gUser);
+  if(token){
+    // console.log(user || gUser);
+    navigate('/home')
   }
   return (
     <div className="w-full max-w-sm p-6 m-auto bg-slate-200 rounded-md shadow-md dark:bg-gray-800 mt-10">

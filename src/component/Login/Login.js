@@ -5,6 +5,7 @@ import auth from "../../firebase.init";
 import { useForm } from "react-hook-form";
 import Loading from "../../Page/Loading";
 import {toast } from 'react-toastify';
+import UseToken from "../../Hooks/UseToken";
   
 
 
@@ -16,6 +17,7 @@ const Login = () => {
   // react router
  const navigate=useNavigate();
  const location =useLocation();
+ const [token]=UseToken(user || gUser)
  
  const from = location.state?.from?.pathname || "/";
   // from onsubmit
@@ -37,7 +39,7 @@ const Login = () => {
     }
 
     // jodi GoogleUser thake taile dibe
-  if(user || gUser){
+  if(token){
     navigate(from, { replace: true })
   }
 

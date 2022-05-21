@@ -17,6 +17,8 @@ import RequireAuth from './component/Login/RequireAuth';
 import DashBoard from './component/DashBoard.js/DashBoard';
 import MyAppoinment from './component/DashBoard.js/MyAppoinment';
 import MyReview from './component/DashBoard.js/MyReview';
+import MyStory from './component/DashBoard.js/MyStory';
+import AllUser from './component/DashBoard.js/AllUser';
 
 function App() {
   AOS.init();
@@ -60,6 +62,8 @@ function App() {
        </RequireAuth>}>
          <Route index element={<MyAppoinment></MyAppoinment>}></Route>
          <Route path='myreview' element={<MyReview></MyReview>}></Route>
+         <Route path='mystory' element={<MyStory></MyStory>}></Route>
+         <Route path='alluser' element={<AllUser></AllUser>}></Route>
        </Route>
        <Route path='/review' element={<Review></Review>}></Route>
        <Route path='/contact' element={<Contact></Contact>}></Route>
