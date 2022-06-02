@@ -4,16 +4,23 @@ import { toast } from 'react-toastify';
 const User = ({user,refetch}) => {
     const {email,Role}=user;
     const handleAdmin=()=>{
-        fetch(`http://localhost:5000/users/admin/${email}`,{
+        fetch(`https://quiet-tor-61846.herokuapp.com/users/admin/${email}`,{
             method:'put',
             headers:{
                 authorization:`Bearer ${localStorage.getItem('accessToken')}`
             }
         })
-        .then(res=>res.json())
+        .then(res=>{
+            if(res.status===401 || res.status===403){
+                toast.error('You do not have an admin')
+            }
+           return res.json()})
         .then(data=>{
+         if(data.modifiedCount >0){
             toast.success('congratulation you are Admin')
             refetch()
+         }
+           
         })
     }
     return (

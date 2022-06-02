@@ -5,7 +5,7 @@ import User from './User';
 
 const AllUser = () => {
     const { isLoading, error, data:user,refetch } = useQuery('user', () =>
-    fetch('http://localhost:5000/users').then(res =>
+    fetch('https://quiet-tor-61846.herokuapp.com/users').then(res =>
       res.json()
       
     )

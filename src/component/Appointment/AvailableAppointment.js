@@ -1,8 +1,7 @@
 import { format } from 'date-fns';
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import { useQuery } from 'react-query';
 import Loading from '../../Page/Loading';
-import AppointmentModal from './AppointmentModal';
 import BookingModal from './BookingModal';
 import Service from './Service';
 
@@ -12,7 +11,7 @@ const AvailableAppointment = ({date,setDate}) => {
     
     const formattedDate=format(date,'PP');
     
-    const {data:services,isLoading,refetch}=useQuery(['available',formattedDate],()=> fetch(`http://localhost:5000/available?date=${formattedDate}`)
+    const {data:services,isLoading,refetch}=useQuery(['available',formattedDate],()=> fetch(`https://quiet-tor-61846.herokuapp.com/available?date=${formattedDate}`)
         .then(res=>res.json())
         );
         if(isLoading){

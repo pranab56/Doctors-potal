@@ -19,6 +19,9 @@ import MyAppoinment from './component/DashBoard.js/MyAppoinment';
 import MyReview from './component/DashBoard.js/MyReview';
 import MyStory from './component/DashBoard.js/MyStory';
 import AllUser from './component/DashBoard.js/AllUser';
+import RequireAdmin from './component/Login/RequireAdmin';
+import AddDoctors from './component/DashBoard.js/AddDoctors';
+import ManageDoctors from './component/DashBoard.js/ManageDoctors';
 
 function App() {
   AOS.init();
@@ -63,7 +66,9 @@ function App() {
          <Route index element={<MyAppoinment></MyAppoinment>}></Route>
          <Route path='myreview' element={<MyReview></MyReview>}></Route>
          <Route path='mystory' element={<MyStory></MyStory>}></Route>
-         <Route path='alluser' element={<AllUser></AllUser>}></Route>
+         <Route path='alluser' element={<RequireAdmin><AllUser></AllUser></RequireAdmin>}></Route>
+         <Route path='doctor' element={<RequireAdmin><AddDoctors></AddDoctors></RequireAdmin>}></Route>
+         <Route path='manageDoctor' element={<RequireAdmin><ManageDoctors></ManageDoctors></RequireAdmin>}></Route>
        </Route>
        <Route path='/review' element={<Review></Review>}></Route>
        <Route path='/contact' element={<Contact></Contact>}></Route>

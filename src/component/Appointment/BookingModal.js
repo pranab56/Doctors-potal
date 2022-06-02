@@ -17,10 +17,11 @@ const BookingModal = ({ treatment, date, setTreatment,refetch }) => {
     const email = event.target.email.value;
     const datas = {TreatmentName,TreatmentId,slot,date,name,number,email};
 
-    fetch("http://localhost:5000/data", {
+    fetch("https://quiet-tor-61846.herokuapp.com/data", {
       method: "POST", 
       headers: {
         "Content-Type": "application/json",
+        
       },
       body: JSON.stringify(datas),
     })

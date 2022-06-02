@@ -6,7 +6,7 @@ const Review = () => {
     e.preventDefault();
     const email = e.target.email.value;
 
-    fetch("http://localhost:5000/data", {
+    fetch("https://quiet-tor-61846.herokuapp.com/data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

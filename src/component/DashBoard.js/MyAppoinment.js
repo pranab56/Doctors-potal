@@ -11,7 +11,7 @@ const MyAppoinment = () => {
     
     useEffect(()=>{
         if(user){
-            fetch(`http://localhost:5000/data?email=${user.email}`,{
+            fetch(`https://quiet-tor-61846.herokuapp.com/data?email=${user.email}`,{
               method:'GET',
               headers:{
                 'authorization':`bearer ${localStorage.getItem('accessToken')}`
